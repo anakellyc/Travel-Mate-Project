@@ -3,7 +3,7 @@ import config from "./config.json";
 
 const service = axios.create({
   baseURL:
-    process.env.NODE_ENV === "production" ? "/api" : `${config.baseUrl}/api`,
+    config.environment === "production" ? "/api" : "http://localhost:5000/api",
   withCredentials: true
 });
 
