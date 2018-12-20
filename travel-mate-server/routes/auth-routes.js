@@ -109,7 +109,6 @@ authRoutes.post("/login", (req, res, next) => {
     }
 
     if (!theUser) {
-      //debugger;
       // "failureDetails" contains the error messages
       // from our logic in "LocalStrategy" { message: '...' }.
       res.status(401).json(failureDetails);
@@ -118,7 +117,6 @@ authRoutes.post("/login", (req, res, next) => {
 
     // save user in session
     req.login(theUser, err => {
-      //debugger;
       if (err) {
         res.status(500).json({ message: "Session save went bad." });
         return;

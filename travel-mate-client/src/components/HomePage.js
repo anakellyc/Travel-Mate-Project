@@ -1,6 +1,7 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, Route } from "react-router-dom";
 import ScrollableAnchor from "react-scrollable-anchor";
+import Contact from "./Contact";
 
 //var Mailto = require("react-mailto");
 //import AuthService from "../auth/auth-service";
@@ -238,10 +239,12 @@ const home = () => {
                 </li>
                 <li className="list-inline-item">&sdot;</li>
                 <li className="list-inline-item">
-                  <a href="/">Contact</a>
-                  {/* <Mailto email="anakcampos@gmail.com" obfuscate={true}>
-                    Contact
-                  </Mailto> */}
+                  {/* <a href="/contact">Contact</a> */}
+
+                  {/* <Contact exact path="/contact" render={() => <Contact />} /> */}
+                  <p className="list-style">
+                    <Link to="/contact">Contact</Link>
+                  </p>
                 </li>
                 <li className="list-inline-item">&sdot;</li>
                 <li className="list-inline-item">

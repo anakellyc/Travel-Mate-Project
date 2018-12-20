@@ -71,8 +71,8 @@ class AddTrip extends Component {
   render() {
     return (
       <div className="main-w3layouts wrapper">
-        <div class="extra-agileinfo">
-          <div class="agileits-extra">
+        <div className="extra-agileinfo">
+          <div className="agileits-extra">
             <h2>Add a Trip:</h2>
             <form onSubmit={this.handleFormSubmit}>
               <label className="white-text">Destination:</label>
@@ -95,15 +95,7 @@ class AddTrip extends Component {
                 onChange={this.handleStartDateChange}
               />
               <br />
-              {/* <label>End Date:</label>
-          <input
-            className="btn-block"
-            type="text"
-            name="endDate"
-            id="endDate"
-            value={this.state.endDate}
-            onChange={e => this.handleChange(e)}
-          /> */}
+
               <br />
               <label className="white-text">End Date:</label>
               <br />
@@ -116,15 +108,6 @@ class AddTrip extends Component {
                 onChange={this.handleEndDateChange}
               />
 
-              {/* <div class="input-group">
-                <input
-                  class="input--style-2 js-datepicker"
-                  type="text"
-                  placeholder="End Date"
-                  name="birthday"
-                />
-                <i class="zmdi zmdi-calendar-note input-icon js-btn-calendar" />
-              </div> */}
               <br />
               <br />
               <label className="white-text">Points of Interest:</label>

@@ -1,8 +1,9 @@
 const express = require("express");
 const mongoose = require("mongoose");
+const nodemailer = require("nodemailer");
 const User = require("../models/user-model");
 const Trip = require("../models/trip-model");
-
+const config = require("../config");
 const router = express.Router();
 
 // GET route => to get all the projects
@@ -112,6 +113,31 @@ router.post("/profile/:id", (req, res) => {
     .catch(err => {
       res.json(err);
     });
+});
+
+router.post("/send-email", (req, res, next) => {
+  debugger;
+  let { email, subject, message, replyto } = req.body;
+  console.log(req.body);
+  let transporter = nodemailer.createTransport({
+    service: "Gmail",
+    auth: {
+      user: config.mailuser,
+      pass: config.pass
+    }
+  });
+  transporter
+    .sendMail({
+      from: '"Travel-Mate" <yournewtravelmates@gmail.com>',
+      to: email,
+      subject: subject,
+      text: message,
+      replyTo: replyto,
+      html: `<b>${message}</b>`
+    })
+    .then(info => console.log("message", { email, subject, message, info }))
+    .catch(error => console.log(error));
+  debugger;
 });
 
 module.exports = router;

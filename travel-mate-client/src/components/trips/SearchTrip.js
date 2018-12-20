@@ -3,8 +3,6 @@ import axios from "axios";
 import config from "../../config.json";
 //import { Redirect } from "react-router-dom";
 
-//import Profile from "../auth/Profile";
-
 class SearchTrip extends Component {
   constructor(props) {
     super(props);
@@ -21,18 +19,10 @@ class SearchTrip extends Component {
 
   add = e => {
     debugger;
-    // if (this.state.tripsAdded.includes(e.target.attributes[1].nodeValue)) {
-    //   return;
-    // }
-    // this.setState({
-    //   tripsAdded: this.tripsAdded.push(e.target.attributes[1].nodeValue)
-    // });
+
     var thisTrip = e.target.attributes[1].nodeValue;
     const { user } = this.props.location.state;
-    // const { params } = this.props.match.params.value;
-    // console.log(params);
-    //var oldTrips = this.props.loggedInUser.trips;
-    //oldTrips.push(addTrip);
+
     debugger;
     axios
       .post(`${config.baseUrl}/api/profile/${user._id}`, {

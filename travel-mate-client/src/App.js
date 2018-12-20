@@ -15,6 +15,7 @@ import HomePage from "./components/HomePage";
 import Profile from "./components/auth/Profile";
 import UserDetails from "./components/auth/UserDetails";
 import SearchTrip from "./components/trips/SearchTrip";
+import Contact from "./components/Contact";
 
 // class App extends Component {
 //   render() {
@@ -156,6 +157,11 @@ class App extends Component {
               exact
               path="/login"
               render={() => <Login getUser={this.getTheUser} />}
+            />
+            <Route
+              exact
+              path="/contact"
+              render={() => <Contact getUser={this.getTheUser} />}
             />
             <Route exact path="/" component={HomePage} />
             <HomePage title="Benefits" id="section1" />
