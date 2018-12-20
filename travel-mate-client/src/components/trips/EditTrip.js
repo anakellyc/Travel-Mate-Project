@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import axios from "axios";
 import DatePicker from "react-datepicker";
+import { Link } from "react-router-dom";
+import config from "../../config.json";
 
 import "react-datepicker/dist/react-datepicker.css";
 
@@ -25,7 +27,7 @@ class EditTrip extends Component {
 
     axios
       .put(
-        `http://localhost:5000/api/trips/${this.props.theTrip._id}`,
+        `${config.baseUrl}/api/trips/${this.props.theTrip._id}`,
         {
           destination,
           startDate,
@@ -76,56 +78,68 @@ class EditTrip extends Component {
 
   render() {
     return (
-      <div>
-        <hr />
-        <h3>Edit Trip</h3>
-        <form onSubmit={this.handleFormSubmit}>
-          <label>Destination:</label>
-          <input
-            type="text"
-            name="destination"
-            value={this.state.destination}
-            onChange={e => this.handleChangeDestination(e)}
-          />
-          {/* <label>Start Date:</label>
+      <div className="main-w3layouts wrapper">
+        <div class="small-agileinfo">
+          <div class="agileits-extra">
+            <h3>Edit Trip</h3>
+            <form onSubmit={this.handleFormSubmit}>
+              <label>Destination:</label>
+              <input
+                type="text"
+                name="destination"
+                value={this.state.destination}
+                onChange={e => this.handleChangeDestination(e)}
+              />
+              {/* <label>Start Date:</label>
           <input
             type="text"
             name="startDate"
             value={this.state.startDate}
             onChange={e => this.handleChangeStartDate(e)}
           /> */}
-          <label>Start Date:</label>
-          <DatePicker
-            dateFormat="dd/MM/yyyy"
-            minDate={new Date()}
-            className="btn-block"
-            selected={this.state.startDate}
-            onChange={this.handleStartDateChange}
-          />
-          {/* <label>End Date:</label>
+              <br />
+              <label>Start Date:</label>
+              <br />
+              <DatePicker
+                dateFormat="dd/MM/yyyy"
+                minDate={new Date()}
+                className="btn-block"
+                selected={this.state.startDate}
+                onChange={this.handleStartDateChange}
+              />
+              {/* <label>End Date:</label>
           <input
             type="text"
             name="endDate"
             value={this.state.endDate}
             onChange={e => this.handleChangeEndDate(e)}
           /> */}
-          <label>End Date:</label>
-          <DatePicker
-            dateFormat="dd/MM/yyyy"
-            minDate={new Date(this.state.startDate)}
-            className="btn-block"
-            selected={this.state.endDate}
-            onChange={this.handleEndDateChange}
-          />
-          <label>Points of Interest:</label>
-          <textarea
-            name="pointsOfInterest"
-            value={this.state.pointsOfInterest}
-            onChange={e => this.handleChangePoints(e)}
-          />
+              <br />
+              <label>End Date:</label>
+              <br />
+              <DatePicker
+                dateFormat="dd/MM/yyyy"
+                minDate={new Date(this.state.startDate)}
+                className="btn-block"
+                selected={this.state.endDate}
+                onChange={this.handleEndDateChange}
+              />
+              <br />
+              <label>Points of Interest:</label>
+              <br />
+              <textarea
+                type="text"
+                className="strong-text"
+                name="pointsOfInterest"
+                value={this.state.pointsOfInterest}
+                onChange={e => this.handleChangePoints(e)}
+              />
 
-          <input type="submit" value="Submit" />
-        </form>
+              <input type="submit" value="Submit" />
+              <Link to={"/trips"}>Back to trips</Link>
+            </form>
+          </div>
+        </div>
       </div>
     );
   }

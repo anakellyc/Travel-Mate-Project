@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import config from "../../config.json";
 
 import AddTrip from "./AddTrip";
 //import UserDetails from "../auth/UserDetails";
@@ -28,10 +29,10 @@ class TripList extends Component {
 
   getAllTrips = () => {
     axios
-      .get(`http://localhost:5000/api/trips`, { withCredentials: true })
+      .get(`${config.baseUrl}/api/trips`, { withCredentials: true })
       .then(responseFromApi => {
         //debugger;
-        console.log("check list of trips", responseFromApi);
+        //console.log("check list of trips", responseFromApi);
         // if (responseFromApi.data.owner === this.props.user._id)
         this.setState({
           listOfTrips: responseFromApi.data

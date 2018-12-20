@@ -59,8 +59,8 @@ class Login extends Component {
       <header className="masthead text-white text-center">
         <div className="overlay" />
         <div className="main-w3layouts wrapper">
-          <div class="main-agileinfo">
-            <div class="agileits-top">
+          <div className="main-agileinfo">
+            <div className="agileits-top">
               <form onSubmit={this.handleFormSubmit}>
                 <label />
                 <input

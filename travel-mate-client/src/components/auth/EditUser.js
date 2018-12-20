@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
+import config from "../../config.json";
 
 class EditUser extends Component {
   constructor(props) {
@@ -24,7 +25,7 @@ class EditUser extends Component {
 
     axios
       .put(
-        `http://localhost:5000/api/profile/${this.props.theUser._id}`,
+        `${config.baseUrl}/api/profile/${this.props.theUser._id}`,
         {
           firstName,
           lastName,

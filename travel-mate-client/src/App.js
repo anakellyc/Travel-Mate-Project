@@ -36,13 +36,29 @@ class App extends Component {
     super(props);
     this.state = { loggedInUser: null };
     this.service = new AuthService();
+    this.fetchUser = this.fetchUser.bind(this);
   }
+  loginUser = () => {
+    this.service
+      .loggedin()
+      .then(response => {
+        this.setState({
+          loggedInUser: response
+        });
+      })
+      .catch(err => {
+        this.setState({
+          loggedInUser: false
+        });
+      });
+  };
 
   fetchUser() {
     if (this.state.loggedInUser === null) {
       this.service
         .loggedin()
         .then(response => {
+          debugger;
           this.setState({
             loggedInUser: response
           });
@@ -132,7 +148,9 @@ class App extends Component {
             <Route
               exact
               path="/signup"
-              render={() => <Signup getUser={this.getTheUser} />}
+              render={() => (
+                <Signup loginUser={this.loginUser} getUser={this.getTheUser} />
+              )}
             />
             <Route
               exact

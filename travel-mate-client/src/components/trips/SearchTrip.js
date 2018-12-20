@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
+import config from "../../config.json";
 //import { Redirect } from "react-router-dom";
 
 //import Profile from "../auth/Profile";
@@ -9,7 +10,8 @@ class SearchTrip extends Component {
     super(props);
     this.state = {
       search: "search",
-      trips: []
+      trips: [],
+      tripsAdded: []
     };
   }
 
@@ -18,31 +20,40 @@ class SearchTrip extends Component {
   };
 
   add = e => {
-    //debugger;
-    var thisTrip = e.target.attributes[0].nodeValue;
+    debugger;
+    // if (this.state.tripsAdded.includes(e.target.attributes[1].nodeValue)) {
+    //   return;
+    // }
+    // this.setState({
+    //   tripsAdded: this.tripsAdded.push(e.target.attributes[1].nodeValue)
+    // });
+    var thisTrip = e.target.attributes[1].nodeValue;
     const { user } = this.props.location.state;
     // const { params } = this.props.match.params.value;
     // console.log(params);
     //var oldTrips = this.props.loggedInUser.trips;
     //oldTrips.push(addTrip);
-    //debugger;
+    debugger;
     axios
-      .post(`http://localhost:5000/api/profile/${user._id}`, {
+      .post(`${config.baseUrl}/api/profile/${user._id}`, {
         withCredentials: true,
         thisTrip: thisTrip
       })
       .then(responseFromApi => {
         //console.log("this trip", responseFromApi);
         return responseFromApi.data;
+      })
+      .catch(error => {
+        debugger;
       });
   };
 
   componentDidMount = () => {
     axios
-      .get(`http://localhost:5000/api/search`, { withCredentials: true })
+      .get(`${config.baseUrl}/api/search`, { withCredentials: true })
       .then(responseFromApi => {
         //debugger;
-        console.log("list of trips", responseFromApi);
+        //console.log("list of trips", responseFromApi);
         this.setState({
           trips: responseFromApi.data
         });
@@ -56,26 +67,49 @@ class SearchTrip extends Component {
       var triplowcase = trip.destination.toLowerCase();
       return triplowcase.includes(this.state.search.toLowerCase());
     });
+
+    var fixedtripsDate = date => {
+      let newstartDate = new Date(date);
+      let day = newstartDate.getDate();
+      let month = newstartDate.getMonth();
+      let year = newstartDate.getFullYear();
+      return `${day}/${month + 1}/${year}`;
+    };
+
     var trips = tripsDisplayed.map((trip, index) => (
       <React.Fragment>
         <h1 class="black">{trip.destination}</h1>
-        <p>{trip.startDate}</p>
-        <p>{trip.endDate}</p>
-        <button thisTrip={trip._id} onClick={this.add} key={index}>
+        <p>From: {fixedtripsDate(trip.startDate)}</p>
+        <p>To: {fixedtripsDate(trip.endDate)}</p>
+        <button
+          className="btn btn-sm btn-primary"
+          thisTrip={trip._id}
+          onClick={this.add}
+          key={index}
+        >
           Add Trip
         </button>
+        <br />
+        <br />
       </React.Fragment>
     ));
     return (
       <div class="page-wrapper bg-blue p-t-100 p-b-100 font-robo">
-        <label>Search your next destination:</label>
-        <input
-          type="text"
-          onChange={this.handleChange}
-          name="search"
-          placeholder={this.state.search}
-        />
-        {trips}
+        <div className="main-w3layouts wrapper">
+          <div class="extra-agileinfo">
+            <div class="agileits-extra">
+              <h3 className="white-text">Search your next destination:</h3>
+              <input
+                type="text"
+                onChange={this.handleChange}
+                name="search"
+                placeholder={this.state.search}
+              />
+              <br />
+              {trips}
+            </div>
+          </div>
+        </div>
       </div>
     );
   }

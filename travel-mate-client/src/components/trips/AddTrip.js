@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
 import DatePicker from "react-datepicker";
+import config from "../../config.json";
 
 import "react-datepicker/dist/react-datepicker.css";
 
@@ -18,14 +19,16 @@ class AddTrip extends Component {
 
   handleFormSubmit = event => {
     event.preventDefault();
+
     const destination = this.state.destination;
     const startDate = this.state.startDate;
     const endDate = this.state.endDate;
     const pointsOfInterest = this.state.pointsOfInterest;
     const owner = this.state.owner;
+    //debugger;
     axios
       .post(
-        "http://localhost:5000/api/trips",
+        `${config.baseUrl}/api/trips`,
         {
           destination,
           startDate,

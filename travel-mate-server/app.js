@@ -52,9 +52,11 @@ app.use(
     sourceMap: true
   })
 );
+if (process.env.ENV == "development") {
+  app.set("views", path.join(__dirname, "views"));
+  app.set("view engine", "hbs");
+}
 
-app.set("views", path.join(__dirname, "views"));
-app.set("view engine", "hbs");
 app.use(express.static(path.join(__dirname, "public")));
 app.use(favicon(path.join(__dirname, "public", "images", "favicon.ico")));
 
@@ -72,6 +74,14 @@ app.use(
 // USE passport.initialize() and passport.session() HERE:
 app.use(passport.initialize());
 app.use(passport.session());
+
+//Production environment
+if (process.env.ENV == "production") {
+  app.use(express.static(path.join(__dirname, "build")));
+  app.get("/", function(req, res) {
+    res.sendFile(path.join(__dirname, "build", "index.html"));
+  });
+}
 
 //CORS
 app.use(

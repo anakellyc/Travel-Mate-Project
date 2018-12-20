@@ -50,7 +50,7 @@ router.get("/profile/:id", (req, res) => {
   //   res.status(400).json({ message: "Specified id is not valid" });
   //   return;
   // }
-  debugger;
+  //debugger;
   User.findById(req.params.id)
     .then(oneUser => {
       res.status(200).json(oneUser);
@@ -65,47 +65,53 @@ router.post("/profile/:id", (req, res) => {
   //   res.status(400).json({ message: "Specified id is not valid" });
   //   return;
   // }
-
+  //debugger;
   var idOfUser = mongoose.Types.ObjectId(req.params.id);
-  var idOfTrip = mongoose.Types.ObjectId(req.body.thisTrip);
+  var idOfTrip = req.body.thisTrip;
+  var objectIdOfTrip = mongoose.Types.ObjectId(req.body.thisTrip);
   console.log("userid", idOfUser);
   console.log("tripid", idOfTrip);
-  debugger;
+  //debugger;
   User.findByIdAndUpdate(idOfUser)
+    // .then(oneUser => {
+    //   oneUser.trips.push(idOfTrip);
+    //   oneUser.save(err => {
+    //     //debugger;
+    //     if (err) {
+    //       res
+    //         .status(400)
+    //         .json({ message: "Saving user to database went wrong." });
+    //       return;
+    //     }
+    //   });
+    // })
+    // .catch(err => {
+    //   res.json(err);
+    // });
     .then(oneUser => {
-      oneUser.trips.push(idOfTrip);
-      oneUser.save(err => {
+      console.log(oneUser.trips);
+      debugger;
+      var tripIdArray = oneUser.trips.map(trip => trip._id.toString());
+      if (tripIdArray.includes(idOfTrip)) {
         debugger;
-        if (err) {
-          res
-            .status(400)
-            .json({ message: "Saving user to database went wrong." });
-          return;
-        }
-      });
+        res.status(400).json({ message: "User already have this trip." });
+        return;
+      } else {
+        oneUser.trips.push(objectIdOfTrip);
+        oneUser.save(err => {
+          debugger;
+          if (err) {
+            res
+              .status(400)
+              .json({ message: "Saving user to database went wrong." });
+            return;
+          }
+        });
+      }
     })
     .catch(err => {
       res.json(err);
     });
-  //.then(oneUser => {
-  //console.log(oneUser.trips);
-  // if (oneUser.trips.includes(idOfTrip)) {
-  //   debugger;
-  //   res.status(400).json({ message: "User already have this trip." });
-  //   return;
-  // } else {
-  // oneUser.trips.push(idOfTrip);
-  // oneUser.save(err => {
-  //   debugger;
-  //   if (err) {
-  //     res
-  //       .status(400)
-  //       .json({ message: "Saving user to database went wrong." });
-  //     return;
-  //   }
-  //   }
-  // });
-  //})
 });
 
 module.exports = router;

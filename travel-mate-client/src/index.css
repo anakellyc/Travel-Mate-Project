@@ -99,6 +99,13 @@ h2 {
   background-size: cover;
 }
 
+.small-agileinfo {
+  width: 35%;
+  margin: 0 auto;
+  background: rgba(0, 0, 0, 0.18);
+  background-size: cover;
+}
+
 .agileits-top {
   padding: 3em;
 }
@@ -121,7 +128,7 @@ input[type="password"],
 textarea[type="text"] {
   font-size: 0.9em;
   color: #fff;
-  font-weight: 100;
+  font-weight: 500;
   width: 100%;
   display: block;
   border: none;
@@ -624,4 +631,8 @@ code {
 .border-bottom {
   border-bottom: 1px solid darkgray;
   padding-bottom: 1em;
+}
+
+.reduce-padding {
+  padding-top: 4rem;
 }

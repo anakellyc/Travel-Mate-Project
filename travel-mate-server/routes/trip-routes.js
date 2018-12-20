@@ -55,14 +55,28 @@ router.get("/trips/:id", (req, res) => {
 router.post("/trips", (req, res, next) => {
   //debugger;
   //console.log(req);
+  let newstartDate = new Date(req.body.startDate);
+  let day = newstartDate.getDate();
+  let month = newstartDate.getMonth();
+  let year = newstartDate.getFullYear();
+  let startDate = `${day}/${month + 1}/${year}`;
+
+  let newEndDate = new Date(req.body.endDate);
+  let dayEnd = newEndDate.getDate();
+  let monthEnd = newEndDate.getMonth();
+  let yearEnd = newEndDate.getFullYear();
+  let endDate = `${dayEnd}/${monthEnd + 1}/${yearEnd}`;
+
+  //debugger;
   Trip.create({
     destination: req.body.destination,
-    startDate: req.body.startDate,
-    endDate: req.body.endDate,
+    startDate: newstartDate,
+    endDate: newEndDate,
     pointsOfInterest: req.body.pointsOfInterest,
     owner: req.user._id
   })
     .then(response => {
+      //debugger;
       User.findByIdAndUpdate(req.user._id, {
         $push: { trips: response._id }
       })
@@ -70,10 +84,12 @@ router.post("/trips", (req, res, next) => {
           res.json(theResponse);
         })
         .catch(err => {
+          //debugger;
           res.json(err);
         });
     })
     .catch(err => {
+      //debugger;
       res.json(err);
     });
 });

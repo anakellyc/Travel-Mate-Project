@@ -40,12 +40,14 @@ authRoutes.post("/signup", parser.single("avatarUrl"), (req, res, next) => {
   }
 
   User.findOne({ email }, (err, foundUser) => {
+    debugger;
     if (err) {
       res.status(500).json({ message: "User check went bad." });
       return;
     }
 
     if (foundUser) {
+      debugger;
       res.status(400).json({ message: "User already exists." });
       return;
     }
@@ -61,16 +63,7 @@ authRoutes.post("/signup", parser.single("avatarUrl"), (req, res, next) => {
       password: hashPass,
       avatarUrl: avatarUrl
     });
-
-    // aNewUser.save().then(aNewUser => {
-    //   req.login(aNewUser, err => {
-    //     if (err) {
-    //     res.status(500).json({ message: "Login after signup went bad." });
-    //     return;
-    //     };
-    //     res.status(200).json(aNewUser);
-    // });
-
+    debugger;
     aNewUser.save(err => {
       debugger;
       if (err) {
@@ -88,12 +81,12 @@ authRoutes.post("/signup", parser.single("avatarUrl"), (req, res, next) => {
           res.status(500).json({ message: "Login after signup went bad." });
           return;
         }
-        if (aNewUser) {
-          debugger;
-          res.status(200).json(aNewUser);
-          res.redirect("/profile");
-          return;
-        }
+        // if (aNewUser) {
+        //   debugger;
+        //   res.status(200).json(aNewUser);
+        //   res.redirect("/profile");
+        //   return;
+        // }
         // Send the user's information to the frontend
         debugger;
         //res.status(200).json(req.user);

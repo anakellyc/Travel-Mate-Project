@@ -1,6 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import ScrollableAnchor from "react-scrollable-anchor";
+
+//var Mailto = require("react-mailto");
 //import AuthService from "../auth/auth-service";
 
 const home = () => {
@@ -20,7 +22,7 @@ const home = () => {
         <div className="container">
           <div className="row">
             <div className="col-xl-9 mx-auto">
-              <h1 class="heading heading-correct-pronounciation">
+              <h1 className="heading heading-correct-pronounciation">
                 Find your
                 <em>Travel Mate</em>
                 Happiness is better when shared
@@ -169,7 +171,7 @@ const home = () => {
                   />
                   <h5>Skra D.</h5>
                   <p className="font-weight-light mb-0">
-                    "This is fantastic! Thanks so much!"
+                    "Wow! This is amazing! Thanks so much!"
                   </p>
                 </div>
               </div>
@@ -183,7 +185,7 @@ const home = () => {
                   <h5>Dea K.</h5>
                   <p className="font-weight-light mb-0">
                     "Travel Mate is amazing. I've met the best travel buddies
-                    who now are good friends."
+                    who are now my good friends."
                   </p>
                 </div>
               </div>
@@ -232,19 +234,22 @@ const home = () => {
             <div className="col-lg-6 h-100 text-center text-lg-left my-auto">
               <ul className="list-inline mb-2">
                 <li className="list-inline-item">
-                  <a href="#">About</a>
+                  <a href="/">About</a>
                 </li>
                 <li className="list-inline-item">&sdot;</li>
                 <li className="list-inline-item">
-                  <a href="#">Contact</a>
+                  <a href="/">Contact</a>
+                  {/* <Mailto email="anakcampos@gmail.com" obfuscate={true}>
+                    Contact
+                  </Mailto> */}
                 </li>
                 <li className="list-inline-item">&sdot;</li>
                 <li className="list-inline-item">
-                  <a href="#">Terms of Use</a>
+                  <a href="/">Terms of Use</a>
                 </li>
                 <li className="list-inline-item">&sdot;</li>
                 <li className="list-inline-item">
-                  <a href="#">Privacy Policy</a>
+                  <a href="/">Privacy Policy</a>
                 </li>
               </ul>
               <p className="text-muted small mb-4 mb-lg-0">
@@ -254,14 +259,24 @@ const home = () => {
             <div className="col-lg-6 h-100 text-center text-lg-right my-auto">
               <ul className="list-inline mb-0">
                 <li className="list-inline-item mr-3">
-                  <a href="#">
+                  <a href="/">
                     {" "}
                     <i className="fab fa-facebook fa-2x fa-fw" />{" "}
                   </a>
                 </li>
                 <li className="list-inline-item mr-3">
-                  <a href="#">
-                    <i className="fab fa-instagram fa-2x fa-fw" />
+                  <a href="/">
+                    {" "}
+                    <i className="fab fa-instagram fa-2x fa-fw" />{" "}
+                  </a>
+                </li>
+                <li className="list-inline-item mr-3">
+                  <a
+                    href="https://github.com/anakellyc"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <i className="fab fa-github fa-2x fa-fw" />
                   </a>
                 </li>
                 <li className="list-inline-item">

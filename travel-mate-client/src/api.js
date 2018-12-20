@@ -1,15 +1,15 @@
 import axios from "axios";
+import config from "./config.json";
 
 const service = axios.create({
   baseURL:
-    process.env.NODE_ENV === "production"
-      ? "/api"
-      : "http://localhost:5000/api",
+    process.env.NODE_ENV === "production" ? "/api" : `${config.baseUrl}/api`,
   withCredentials: true
 });
 
 const errHandler = err => {
   // console.error(err);
+
   if (err.response && err.response.data) {
     // console.error("API response", err.response.data);
     throw err.response.data.message;
@@ -27,12 +27,14 @@ export default {
     formData.append("password", inputData.password);
     formData.append("avatarUrl", inputData.avatarUrl);
     return service
-      .post("http://localhost:5000/api/signup", formData, {
+      .post(`${config.baseUrl}/api/signup`, formData, {
         headers: {
           "Content-Type": "multipart/form-data"
         }
       })
-      .then(res => res.data)
+      .then(res => {
+        return res.data;
+      })
       .catch(errHandler);
   }
 };

@@ -4,8 +4,8 @@ import AuthService from "../auth/auth-service";
 import "../../index.css";
 // import { goToAnchor } from "react-scrollable-anchor";
 import ScrollableAnchor from "react-scrollable-anchor";
-import HomePage from "../HomePage";
-import { animateScroll as scroll } from "react-scroll";
+//import HomePage from "../HomePage";
+//import { animateScroll as scroll } from "react-scroll";
 
 // const navbar = () => {
 //   return (
@@ -48,29 +48,29 @@ class Navbar extends Component {
       //debugger;
       return (
         <div>
-          <nav class="navbar navbar-light bg-light static-top">
-            <li class="navbar-brand">
+          <nav className="navbar navbar-light bg-light static-top">
+            <li className="navbar-brand">
               <Link
-                class="navbar-brand"
+                className="navbar-brand"
                 to="/profile"
                 style={{ textDecoration: "none" }}
               >
                 Home
               </Link>
             </li>
-            <li class="navbar-brand">
+            <li className="navbar-brand">
               <Link
-                class="navbar-brand"
+                className="navbar-brand"
                 to="/profile/:id"
                 style={{ textDecoration: "none" }}
               >
                 Profile
               </Link>
             </li>
-            <li class="list-style">
+            <li className="list-style">
               <Link to="/">
                 <button
-                  class="btn btn-primary"
+                  className="btn btn-primary"
                   onClick={() => this.logoutUser()}
                 >
                   Logout
@@ -84,22 +84,22 @@ class Navbar extends Component {
     } else {
       return (
         <ScrollableAnchor id="home">
-          <nav class="navbar navbar-light bg-light static-top">
-            <div class="container">
-              <li class="navbar-brand">
-                <Link class="navbar-brand" to="/">
+          <nav className="navbar navbar-light bg-light static-top">
+            <div className="container">
+              <li className="navbar-brand">
+                <Link className="navbar-brand" to="/">
                   Travel Mate
                 </Link>
               </li>
 
-              <a class="navbar-brand" href="/#section1">
+              <a className="navbar-brand" href="/#section1">
                 Benefits
               </a>
-              <a class="navbar-brand" href="/#section2">
+              <a className="navbar-brand" href="/#section2">
                 Testimonials
               </a>
-              <li class="list-style">
-                <Link class="btn btn-primary" to="/login">
+              <li className="list-style">
+                <Link className="btn btn-primary" to="/login">
                   Sign In
                 </Link>
               </li>

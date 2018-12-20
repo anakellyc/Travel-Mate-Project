@@ -3,6 +3,7 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import EditUser from "./EditUser";
 import "../../index.css";
+import config from "../../config.json";
 
 class UserDetails extends Component {
   constructor(props) {
@@ -17,7 +18,7 @@ class UserDetails extends Component {
   getSingleUser = () => {
     const { params } = this.props.match;
     axios
-      .get(`http://localhost:5000/api/profile/${params.id}`, {
+      .get(`${config.baseUrl}/api/profile/${params.id}`, {
         withCredentials: true
       })
       .then(responseFromApi => {
@@ -46,7 +47,7 @@ class UserDetails extends Component {
   // deleteUser = id => {
   //   const { params } = this.props.match;
   //   axios
-  //     .delete(`http://localhost:5000/api/profile/${params.id}`, {
+  //     .delete(`${config.baseUrl}/api/profile/${params.id}`, {
   //       withCredentials: true
   //     })
   //     .then(responseFromApi => {
@@ -73,7 +74,7 @@ class UserDetails extends Component {
   //};
 
   render() {
-    console.log(this.props.loggedInUser.avatarUrl);
+    //console.log(this.props.loggedInUser.avatarUrl);
     return (
       // <div>
       //   <img

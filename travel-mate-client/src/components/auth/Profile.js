@@ -61,7 +61,7 @@ class Profile extends Component {
           <div className="container">
             <div className="row">
               <div className="col-xl-9 mx-auto">
-                <h1 class="heading heading-correct-pronounciation">
+                <h1 className="heading heading-correct-pronounciation">
                   What's your next destination?
                 </h1>
               </div>

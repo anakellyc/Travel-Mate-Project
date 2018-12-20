@@ -15,20 +15,26 @@ class Signup extends Component {
       avatarUrl: null
     };
     this.service = new AuthService();
+    this.handleFormSubmit = this.handleFormSubmit.bind(this);
   }
 
   handleFormSubmit = event => {
-    debugger;
+    var thisContext = this;
     event.preventDefault();
-    api.signup({
-      firstName: this.state.firstName,
-      lastName: this.state.lastName,
-      email: this.state.email,
-      about: this.state.about,
-      password: this.state.password,
+    api
+      .signup({
+        firstName: this.state.firstName,
+        lastName: this.state.lastName,
+        email: this.state.email,
+        about: this.state.about,
+        password: this.state.password,
 
-      avatarUrl: this.state.avatarUrl
-    });
+        avatarUrl: this.state.avatarUrl
+      })
+      .then(() => {
+        //thisContext.forceUpdate();
+        thisContext.props.loginUser();
+      });
   };
 
   handleChange = event => {
@@ -44,7 +50,7 @@ class Signup extends Component {
 
   render() {
     return (
-      <header className="masthead text-white text-center">
+      <header className="masthead text-white text-center reduce-padding">
         <div className="overlay" />
         <div className="main-w3layouts wrapper">
           <h2>SingUp and start exploring!</h2>
