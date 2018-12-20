@@ -1,5 +1,8 @@
 import React, { Component } from "react";
 import axios from "axios";
+import DatePicker from "react-datepicker";
+
+import "react-datepicker/dist/react-datepicker.css";
 
 class EditTrip extends Component {
   constructor(props) {
@@ -21,12 +24,16 @@ class EditTrip extends Component {
     event.preventDefault();
 
     axios
-      .put(`http://localhost:5000/api/trips/${this.props.theTrip._id}`, {
-        destination,
-        startDate,
-        endDate,
-        pointsOfInterest
-      })
+      .put(
+        `http://localhost:5000/api/trips/${this.props.theTrip._id}`,
+        {
+          destination,
+          startDate,
+          endDate,
+          pointsOfInterest
+        },
+        { withCredentials: true }
+      )
       .then(() => {
         this.props.getTheTrip();
       })
@@ -39,15 +46,25 @@ class EditTrip extends Component {
     });
   };
 
-  handleChangeStartDate = event => {
+  // handleChangeStartDate = event => {
+  //   this.setState({
+  //     startDate: event.target.value
+  //   });
+  // };
+  handleStartDateChange = date => {
     this.setState({
-      startDate: event.target.value
+      startDate: date
     });
   };
 
-  handleChangeEndDate = event => {
+  // handleChangeEndDate = event => {
+  //   this.setState({
+  //     endDate: event.target.value
+  //   });
+  // };
+  handleEndDateChange = date => {
     this.setState({
-      endDate: event.target.value
+      endDate: date
     });
   };
 
@@ -70,19 +87,35 @@ class EditTrip extends Component {
             value={this.state.destination}
             onChange={e => this.handleChangeDestination(e)}
           />
-          <label>Start Date:</label>
+          {/* <label>Start Date:</label>
           <input
             type="text"
             name="startDate"
             value={this.state.startDate}
             onChange={e => this.handleChangeStartDate(e)}
+          /> */}
+          <label>Start Date:</label>
+          <DatePicker
+            dateFormat="dd/MM/yyyy"
+            minDate={new Date()}
+            className="btn-block"
+            selected={this.state.startDate}
+            onChange={this.handleStartDateChange}
           />
-          <label>End Date:</label>
+          {/* <label>End Date:</label>
           <input
             type="text"
             name="endDate"
             value={this.state.endDate}
             onChange={e => this.handleChangeEndDate(e)}
+          /> */}
+          <label>End Date:</label>
+          <DatePicker
+            dateFormat="dd/MM/yyyy"
+            minDate={new Date(this.state.startDate)}
+            className="btn-block"
+            selected={this.state.endDate}
+            onChange={this.handleEndDateChange}
           />
           <label>Points of Interest:</label>
           <textarea

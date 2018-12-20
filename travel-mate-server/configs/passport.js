@@ -4,21 +4,25 @@ const bcrypt = require("bcryptjs"); // !!!
 const passport = require("passport");
 
 passport.serializeUser((loggedInUser, cb) => {
+  //debugger;
   cb(null, loggedInUser._id);
 });
 
 passport.deserializeUser((userIdFromSession, cb) => {
+  //debugger;
   User.findById(userIdFromSession, (err, userDocument) => {
     if (err) {
       cb(err);
       return;
     }
+    //debugger;
     cb(null, userDocument);
   });
 });
 
 passport.use(
-  new LocalStrategy((email, password, next) => {
+  new LocalStrategy({ usernameField: "email" }, (email, password, next) => {
+    //debugger;
     User.findOne({ email }, (err, foundUser) => {
       if (err) {
         next(err);
@@ -26,12 +30,12 @@ passport.use(
       }
 
       if (!foundUser) {
-        next(null, false, { message: "Incorrect credentials." });
+        next(null, false, { message: "Incorrect email." });
         return;
       }
 
       if (!bcrypt.compareSync(password, foundUser.password)) {
-        next(null, false, { message: "Incorrect credentials." });
+        next(null, false, { message: "Incorrect password." });
         return;
       }
 
@@ -39,3 +43,45 @@ passport.use(
     });
   })
 );
+
+// const User = require("../models/user-model");
+// const LocalStrategy = require("passport-local").Strategy;
+// const bcrypt = require("bcryptjs");
+// const passport = require("passport");
+
+// passport.serializeUser((loggedInUser, cb) => {
+//   cb(null, loggedInUser._id);
+// });
+
+// passport.deserializeUser((userIdFromSession, cb) => {
+//   User.findById(userIdFromSession, (err, userDocument) => {
+//     if (err) {
+//       cb(err);
+//       return;
+//     }
+//     cb(null, userDocument);
+//   });
+// });
+
+// passport.use(
+//   new LocalStrategy((email, password, next) => {
+//     User.findOne({ email }, (err, foundUser) => {
+//       if (err) {
+//         next(err);
+//         return;
+//       }
+
+//       if (!foundUser) {
+//         next(null, false, { message: "Incorrect credentials." });
+//         return;
+//       }
+
+//       if (!bcrypt.compareSync(password, foundUser.password)) {
+//         next(null, false, { message: "Incorrect credentials." });
+//         return;
+//       }
+
+//       next(null, foundUser);
+//     });
+//   })
+// );

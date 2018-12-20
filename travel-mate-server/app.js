@@ -14,6 +14,7 @@ const session = require("express-session");
 const passport = require("passport");
 
 require("./configs/passport");
+var cloudinary = require("./configs/cloudinary");
 
 mongoose
   .connect(
@@ -62,7 +63,6 @@ const config = require("./config");
 
 app.use(
   session({
-    // secret: "some secret goes here",
     secret: config.passportSecret,
     resave: true,
     saveUninitialized: true
@@ -82,7 +82,7 @@ app.use(
 );
 
 // default value for title local
-app.locals.title = "Express - Generated with IronGenerator";
+app.locals.title = "Travel Mate";
 
 const index = require("./routes/index");
 app.use("/", index);

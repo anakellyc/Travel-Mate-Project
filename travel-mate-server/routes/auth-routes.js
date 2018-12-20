@@ -1,27 +1,37 @@
 const express = require("express");
 const authRoutes = express.Router();
-
+const parser = require("../configs/cloudinary");
 const passport = require("passport");
 const bcrypt = require("bcryptjs");
+const multer = require("multer");
+var bodyParser = require("body-parser");
 
 // require the user model !!!!
 const User = require("../models/user-model");
 
-authRoutes.post("/signup", (req, res, next) => {
+// authRoutes.post("/cloudetest", parser.single("picture"), (req, res) => {
+//   debugger
+//   res.status(200).send("OK");
+// });
+
+authRoutes.post("/signup", parser.single("avatarUrl"), (req, res, next) => {
   const firstName = req.body.firstName;
   const lastName = req.body.lastName;
   const email = req.body.email;
   const about = req.body.about;
   const password = req.body.password;
-  const avatarUrl = `/uploads/${req.file.filename}`;
-  // const username = req.body.username;
 
+  if (req.file) {
+    var avatarUrl = req.file.url;
+  }
+
+  debugger;
   if (!firstName || !lastName || !email || !password) {
-    res.status(400).json({ message: "Please provide all required fields" });
+    res.status(400).json({ message: "Provide all required fields" });
     return;
   }
 
-  if (password.length < 7) {
+  if (password.length <= 7) {
     res.status(400).json({
       message:
         "Please make your password at least 8 characters long for security purposes."
@@ -36,7 +46,7 @@ authRoutes.post("/signup", (req, res, next) => {
     }
 
     if (foundUser) {
-      res.status(400).json({ message: "Existent user." });
+      res.status(400).json({ message: "User already exists." });
       return;
     }
 
@@ -52,7 +62,17 @@ authRoutes.post("/signup", (req, res, next) => {
       avatarUrl: avatarUrl
     });
 
+    // aNewUser.save().then(aNewUser => {
+    //   req.login(aNewUser, err => {
+    //     if (err) {
+    //     res.status(500).json({ message: "Login after signup went bad." });
+    //     return;
+    //     };
+    //     res.status(200).json(aNewUser);
+    // });
+
     aNewUser.save(err => {
+      debugger;
       if (err) {
         res
           .status(400)
@@ -63,14 +83,22 @@ authRoutes.post("/signup", (req, res, next) => {
       // Automatically log in user after sign up
       // .login() here is actually predefined passport method
       req.login(aNewUser, err => {
+        debugger;
         if (err) {
           res.status(500).json({ message: "Login after signup went bad." });
           return;
         }
-
+        if (aNewUser) {
+          debugger;
+          res.status(200).json(aNewUser);
+          res.redirect("/profile");
+          return;
+        }
         // Send the user's information to the frontend
-        // We can use also: res.status(200).json(req.user);
+        debugger;
+        //res.status(200).json(req.user);
         res.status(200).json(aNewUser);
+        debugger;
       });
     });
   });
@@ -78,6 +106,8 @@ authRoutes.post("/signup", (req, res, next) => {
 
 authRoutes.post("/login", (req, res, next) => {
   passport.authenticate("local", (err, theUser, failureDetails) => {
+    //debugger;
+    //console.log(theUser.email);
     if (err) {
       res
         .status(500)
@@ -86,6 +116,7 @@ authRoutes.post("/login", (req, res, next) => {
     }
 
     if (!theUser) {
+      //debugger;
       // "failureDetails" contains the error messages
       // from our logic in "LocalStrategy" { message: '...' }.
       res.status(401).json(failureDetails);
@@ -94,12 +125,14 @@ authRoutes.post("/login", (req, res, next) => {
 
     // save user in session
     req.login(theUser, err => {
+      //debugger;
       if (err) {
         res.status(500).json({ message: "Session save went bad." });
         return;
       }
 
       // We are now logged in (that's why we can also send req.user)
+      //debugger;
       res.status(200).json(theUser);
     });
   })(req, res, next);
@@ -112,6 +145,7 @@ authRoutes.post("/logout", (req, res, next) => {
 });
 
 authRoutes.get("/loggedin", (req, res, next) => {
+  //debugger;
   // req.isAuthenticated() is defined by passport
   if (req.isAuthenticated()) {
     res.status(200).json(req.user);
