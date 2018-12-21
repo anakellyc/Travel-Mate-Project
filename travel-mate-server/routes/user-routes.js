@@ -27,9 +27,7 @@ router.get("/profile", (req, res, next) => {
 
   // our projects have array of tasks' ids and
   // we can use .populate() method to get the whole task objects
-  //                                   ^
-  //                                   |
-  //                                   |
+
   User.findById(req.params.id)
     .populate("trips")
     .then(thisUser => {

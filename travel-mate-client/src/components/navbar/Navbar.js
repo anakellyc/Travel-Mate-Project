@@ -24,7 +24,6 @@ class Navbar extends Component {
   };
 
   render() {
-    //debugger;
     if (this.state.loggedInUser) {
       //debugger;
       return (
