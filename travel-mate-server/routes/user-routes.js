@@ -74,38 +74,63 @@ router.post("/profile/:id", (req, res) => {
   console.log("tripid", idOfTrip);
   //debugger;
   User.findByIdAndUpdate(idOfUser)
-    // .then(oneUser => {
-    //   oneUser.trips.push(idOfTrip);
-    //   oneUser.save(err => {
-    //     //debugger;
-    //     if (err) {
-    //       res
-    //         .status(400)
-    //         .json({ message: "Saving user to database went wrong." });
-    //       return;
-    //     }
-    //   });
-    // })
-    // .catch(err => {
-    //   res.json(err);
-    // });
     .then(oneUser => {
       console.log(oneUser.trips);
-      debugger;
+      //debugger;
       var tripIdArray = oneUser.trips.map(trip => trip._id.toString());
       if (tripIdArray.includes(idOfTrip)) {
-        debugger;
+        //debugger;
         res.status(400).json({ message: "User already have this trip." });
         return;
       } else {
         oneUser.trips.push(objectIdOfTrip);
         oneUser.save(err => {
-          debugger;
+          //debugger;
           if (err) {
             res
               .status(400)
               .json({ message: "Saving user to database went wrong." });
             return;
+          } else {
+            res.status(200).send({ message: "trip added" });
+          }
+        });
+      }
+    })
+    .catch(err => {
+      res.json(err);
+    });
+});
+
+router.put("/profile/:id", (req, res) => {
+  var idOfUser = mongoose.Types.ObjectId(req.params.id);
+  var idOfTrip = req.body.trip._id;
+  var objectIdOfTrip = mongoose.Types.ObjectId(idOfTrip);
+  console.log("userid", idOfUser);
+  console.log("tripid", idOfTrip);
+  console.log("objtripid", objectIdOfTrip);
+  //debugger;
+  User.findByIdAndUpdate(idOfUser)
+    .then(oneUser => {
+      console.log("before", oneUser.trips);
+      debugger;
+      var tripIdArray = oneUser.trips.map(trip => trip._id.toString());
+      if (tripIdArray.includes(idOfTrip)) {
+        debugger;
+        //   res.status(400).json({ message: "User already have this trip." });
+        //   return;
+        // } else {
+        oneUser.trips.pull(idOfTrip);
+        oneUser.save(err => {
+          debugger;
+          console.log("after", oneUser.trips);
+          if (err) {
+            res
+              .status(400)
+              .json({ message: "Saving user to database went wrong." });
+            return;
+          } else {
+            res.status(200).send({ message: "trip added" });
           }
         });
       }
@@ -116,7 +141,7 @@ router.post("/profile/:id", (req, res) => {
 });
 
 router.post("/send-email", (req, res, next) => {
-  debugger;
+  //debugger;
   let { email, subject, message, replyto } = req.body;
   console.log(req.body);
   let transporter = nodemailer.createTransport({
@@ -137,7 +162,6 @@ router.post("/send-email", (req, res, next) => {
     })
     .then(info => console.log("message", { email, subject, message, info }))
     .catch(error => console.log(error));
-  debugger;
 });
 
 module.exports = router;

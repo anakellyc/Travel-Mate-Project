@@ -17,21 +17,6 @@ import UserDetails from "./components/auth/UserDetails";
 import SearchTrip from "./components/trips/SearchTrip";
 import Contact from "./components/Contact";
 
-// class App extends Component {
-//   render() {
-//     return (
-//       <div className="App">
-//         <Navbar />
-//         <Switch>
-//           <Route exact path="/trips" component={TripList} />
-//           <Route exact path="/trips/:id" component={TripDetails} />
-//         </Switch>
-//       </div>
-//     );
-//   }
-// }
-//export default App;
-
 class App extends Component {
   constructor(props) {
     super(props);
@@ -79,10 +64,6 @@ class App extends Component {
   };
 
   render() {
-    //debugger;
-    // if (this.state.loggedInUser) var userId = this.state.loggedInUser._id || "";
-    // else var userId = "";
-
     this.fetchUser();
     if (this.state.loggedInUser) {
       var user = this.state.loggedInUser;
@@ -99,10 +80,9 @@ class App extends Component {
             <Route
               exact
               path="/search"
-              component={SearchTrip}
+              render={props => <SearchTrip {...props} user={user} />}
               loggedInUser={user}
             />
-            {/* <Route exact path="/trips/:id" component={TripDetails} /> */}
             <Route
               exact
               path="/trips/:id"

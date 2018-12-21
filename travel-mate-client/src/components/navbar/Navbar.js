@@ -2,26 +2,7 @@ import React, { Component } from "react";
 import { Link, Redirect } from "react-router-dom";
 import AuthService from "../auth/auth-service";
 import "../../index.css";
-// import { goToAnchor } from "react-scrollable-anchor";
 import ScrollableAnchor from "react-scrollable-anchor";
-//import HomePage from "../HomePage";
-//import { animateScroll as scroll } from "react-scroll";
-
-// const navbar = () => {
-//   return (
-//     <nav className="nav-style">
-//       <ul>
-//         <li>
-//           <Link to="/trips" style={{ textDecoration: "none" }}>
-//             My Trips
-//           </Link>
-//         </li>
-//       </ul>
-//     </nav>
-//   );
-// };
-
-// export default navbar;
 
 class Navbar extends Component {
   constructor(props) {
@@ -67,6 +48,24 @@ class Navbar extends Component {
                 Profile
               </Link>
             </li>
+            <li className="navbar-brand">
+              <Link
+                className="navbar-brand"
+                to="/trips"
+                style={{ textDecoration: "none" }}
+              >
+                Trips
+              </Link>
+            </li>
+            <li className="navbar-brand">
+              <Link
+                className="navbar-brand"
+                to="/search"
+                style={{ textDecoration: "none" }}
+              >
+                Search
+              </Link>
+            </li>
             <li className="list-style">
               <Link to="/">
                 <button
@@ -109,27 +108,6 @@ class Navbar extends Component {
             </div>
           </nav>
         </ScrollableAnchor>
-        /* <nav className="navbar navbar-light bg-light static-top">
-          <div className={("container", "nav-style")}>
-            <ul>
-              <li class="list-style">
-                <Link class="navbar-brand" to="/">
-                  Travel Mate
-                </Link>
-              </li>
-              <li class="list-style">
-                <Link to="/login" class="btn btn-primary">
-                  Login
-                </Link>
-              </li>
-              <li class="list-style">
-                <Link to="/signup" class="btn btn-primary">
-                  Signup
-                </Link>
-              </li>
-            </ul>
-          </div>
-        </nav> */
       );
     }
   }

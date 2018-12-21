@@ -11,6 +11,7 @@ class SearchTrip extends Component {
       trips: [],
       tripsAdded: []
     };
+    this.add = this.add.bind(this);
   }
 
   handleChange = e => {
@@ -18,12 +19,10 @@ class SearchTrip extends Component {
   };
 
   add = e => {
-    debugger;
-
+    console.log("user", this.props);
     var thisTrip = e.target.attributes[1].nodeValue;
-    const { user } = this.props.location.state;
+    const user = this.props.user;
 
-    debugger;
     axios
       .post(`${config.baseUrl}/api/profile/${user._id}`, {
         withCredentials: true,
@@ -31,10 +30,12 @@ class SearchTrip extends Component {
       })
       .then(responseFromApi => {
         //console.log("this trip", responseFromApi);
+        this.props.history.push("/trips");
         return responseFromApi.data;
       })
       .catch(error => {
-        debugger;
+        //debugger;
+        this.props.history.push("/trips");
       });
   };
 

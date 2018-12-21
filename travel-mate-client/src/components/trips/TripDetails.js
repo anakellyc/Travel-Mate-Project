@@ -48,7 +48,7 @@ class TripDetails extends Component {
     }
   };
 
-  // DELETE PROJECT:
+  // DELETE trip:
   deleteTrip = id => {
     const { params } = this.props.match;
     axios
@@ -61,6 +61,23 @@ class TripDetails extends Component {
       })
       .catch(err => {
         console.log(err);
+      });
+  };
+
+  //remove trip:
+  removeTrip = id => {
+    axios
+      .put(`${config.baseUrl}/api/profile/${this.props.loggedInUser._id}`, {
+        withCredentials: true,
+        trip: this.state.trip
+      })
+      .then(responseFromApi => {
+        //console.log(responseFromApi);
+        this.props.history.push("/trips");
+      })
+      .catch(err => {
+        console.log(err);
+        this.props.history.push("/trips");
       });
   };
 
@@ -107,46 +124,47 @@ class TripDetails extends Component {
           <h4>Contact your travel buddy:</h4>
           {this.state.trip.owner ? (
             /* <p>{this.state.trip.owner.email}</p> */
-            <div className="main-w3layouts wrapper">
-              <div class="small-agileinfo">
-                <div class="agileits-extra">
-                  <form onSubmit={this.sendmessage}>
-                    {/* <h2>Your email:</h2>
-                <input
-                  className="btn-block"
-                  type="text"
-                  name="replyto"
-                  value={this.state.replyto}
-                  onChange={e => this.handleChange(e)}
-                /> */}
-                    <br />
-                    <label>Subject</label>
-                    <input
-                      type="text"
-                      name="subject"
-                      value={this.state.subject}
-                      onChange={e => this.handleChange(e)}
-                    />
-                    <br />
+            <React.Fragment>
+              <div className="main-w3layouts wrapper">
+                <div class="small-agileinfo">
+                  <div class="agileits-extra">
+                    <form onSubmit={this.sendmessage}>
+                      <br />
+                      <label>Subject</label>
+                      <input
+                        type="text"
+                        name="subject"
+                        value={this.state.subject}
+                        onChange={e => this.handleChange(e)}
+                      />
+                      <br />
 
-                    <label>Message</label>
+                      <label>Message</label>
 
-                    <textarea
-                      type="text"
-                      name="message"
-                      value={this.state.message}
-                      onChange={e => this.handleChange(e)}
-                    />
-                    <input type="submit" value="Submit" />
-                  </form>
+                      <textarea
+                        type="text"
+                        name="message"
+                        value={this.state.message}
+                        onChange={e => this.handleChange(e)}
+                      />
+                      <input type="submit" value="Submit" />
+                    </form>
+                    <Link to={"/trips"}>Back to trips</Link>
+                  </div>
                 </div>
               </div>
-            </div>
+              <button
+                className="btn btn-danger"
+                onClick={() => this.removeTrip(this.state.trip._id)}
+              >
+                Remove this trip
+              </button>
+              <br />
+            </React.Fragment>
           ) : (
             <p>Loading</p>
             /* <img src="/public/Loading-icon.gif" alt="loading" /> */
           )}
-          <Link to={"/trips"}>Back to trips</Link>
         </div>
       );
     }

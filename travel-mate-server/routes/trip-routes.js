@@ -36,11 +36,6 @@ router.get("/trips", (req, res, next) => {
 
 // GET route => to get a specific project/detailed view
 router.get("/trips/:id", (req, res) => {
-  // if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
-  //   res.status(400).json({ message: "Specified id is not valid" });
-  //   return;
-  // }
-
   Trip.findById(req.params.id)
     .populate("owner")
     .then(oneTrip => {

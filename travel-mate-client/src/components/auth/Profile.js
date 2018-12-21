@@ -19,36 +19,6 @@ class Profile extends Component {
   render() {
     //debugger;
     return (
-      // <React.Fragment>
-      //   <div>
-      //     <h1 className="black">Welcome {this.props.loggedInUser.firstName}</h1>
-      //     <p>What's your next destination?</p>
-      //   </div>
-
-      //   <button>
-      //     <Link
-      //       to="/trips"
-      //       style={{ textDecoration: "none" }}
-      //       component={TripList}
-      //       user={this.props.loggedInUser}
-      //     >
-      //       Trips
-      //     </Link>
-      //   </button>
-      //   <button>
-      //     <Link
-      //       to={{
-      //         pathname: "/search",
-      //         state: { user: this.props.loggedInUser }
-      //       }}
-      //       style={{ textDecoration: "none" }}
-      //       component={SearchTrip}
-      //     >
-      //       Search
-      //     </Link>
-      //   </button>
-      // </React.Fragment>
-
       <React.Fragment>
         <header className="masthead2 text-white text-center">
           <div>
@@ -76,6 +46,16 @@ class Profile extends Component {
                     Trips
                   </Link>
                 </p>
+                {/* <p className="list-style">
+                  <Link
+                    className="btn btn-primary"
+                    to="/search"
+                    user={this.props.loggedInUser}
+                    component={SearchTrip}
+                  >
+                    Search
+                  </Link>
+                </p> */}
                 <p className="list-style">
                   <Link
                     className="btn btn-primary"
@@ -83,7 +63,9 @@ class Profile extends Component {
                       pathname: "/search",
                       state: { user: this.props.loggedInUser }
                     }}
-                    component={SearchTrip}
+                    render={props => (
+                      <SearchTrip {...props} state={this.props.loggedInUser} />
+                    )}
                   >
                     Search
                   </Link>
