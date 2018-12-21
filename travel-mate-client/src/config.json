@@ -1,1 +1,1 @@
-{ "environment": "production", "baseUrl": "http://178.128.247.231" }
+{ "environment": "development", "baseUrl": "http://localhost:5000" }

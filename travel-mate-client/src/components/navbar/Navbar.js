@@ -97,9 +97,14 @@ class Navbar extends Component {
               <a className="navbar-brand" href="/#section2">
                 Testimonials
               </a>
-              <a className="navbar-brand" href="/contact">
+              {/* <a className="navbar-brand" href="/contact">
                 Contact
-              </a>
+              </a> */}
+              <li className="list-style">
+                <Link className="navbar-brand" to="/contact">
+                  Contact
+                </Link>
+              </li>
               <li className="list-style">
                 <Link className="btn btn-primary" to="/login">
                   Sign In

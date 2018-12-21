@@ -18,7 +18,7 @@ router.get("/search", (req, res, next) => {
 });
 
 router.get("/trips", (req, res, next) => {
-  //debugger;
+  debugger;
   //console.log("request", req);
   //console.log("response", res);
   // var idOfUserLoggedIn = "";
@@ -27,6 +27,7 @@ router.get("/trips", (req, res, next) => {
     .populate("trips")
     .then(usersWithTrips => {
       //console.log("user with trips", usersWithTrips);
+      debugger;
       res.json(usersWithTrips[0].trips);
     })
     .catch(err => {
@@ -36,6 +37,9 @@ router.get("/trips", (req, res, next) => {
 
 // GET route => to get a specific project/detailed view
 router.get("/trips/:id", (req, res) => {
+  debugger;
+
+
   Trip.findById(req.params.id)
     .populate("owner")
     .then(oneTrip => {

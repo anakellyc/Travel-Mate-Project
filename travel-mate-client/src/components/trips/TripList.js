@@ -31,12 +31,21 @@ class TripList extends Component {
     axios
       .get(`${config.baseUrl}/api/trips`, { withCredentials: true })
       .then(responseFromApi => {
-        //debugger;
-        //console.log("check list of trips", responseFromApi);
-        // if (responseFromApi.data.owner === this.props.user._id)
-        this.setState({
-          listOfTrips: responseFromApi.data
-        });
+        if (
+          responseFromApi.data.length === 0 ||
+          responseFromApi.data === undefined ||
+          responseFromApi.data === null ||
+          !responseFromApi.data ||
+          responseFromApi.data === ""
+        ) {
+          this.setState({
+            listOfTrips: []
+          });
+        } else {
+          this.setState({
+            listOfTrips: responseFromApi.data
+          });
+        }
       });
     //})
   };
