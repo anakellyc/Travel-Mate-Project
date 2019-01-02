@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
+//import { Link } from "react-router-dom";
 import config from "../config.json";
 
 class Contact extends Component {
@@ -26,6 +26,15 @@ class Contact extends Component {
       message: this.state.message,
       replyto: this.state.replyto
     });
+    // .then(responseFromApi => {
+    //   //console.log("this trip", responseFromApi);
+    //   this.props.history.push("/");
+    //   return responseFromApi.data;
+    // })
+    // .catch(error => {
+    //   //debugger;
+    //   this.props.history.push("/");
+    // });
   };
 
   render() {

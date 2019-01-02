@@ -89,6 +89,7 @@ class TripDetails extends Component {
 
   sendmessage = () => {
     axios.post(`${config.baseUrl}/api/send-email`, {
+      // axios.post(`${config.baseUrl}/api/contact`, {
       email: this.state.trip.owner.email,
       subject: this.state.subject,
       message: this.state.message,
@@ -121,7 +122,7 @@ class TripDetails extends Component {
       //debugger;
       return (
         <div>
-          <h4>Contact your travel buddy:</h4>
+          <h4>Contact your travel mate:</h4>
           {this.state.trip.owner ? (
             /* <p>{this.state.trip.owner.email}</p> */
             <React.Fragment>

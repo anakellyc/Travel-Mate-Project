@@ -138,6 +138,7 @@ router.put("/profile/:id", (req, res) => {
     });
 });
 
+// router.post("/contact", (req, res, next) => {
 router.post("/send-email", (req, res, next) => {
   //debugger;
   let { email, subject, message, replyto } = req.body;
@@ -158,8 +159,14 @@ router.post("/send-email", (req, res, next) => {
       replyTo: replyto,
       html: `<b>${message}</b>`
     })
-    .then(info => console.log("message", { email, subject, message, info }))
-    .catch(error => console.log(error));
+    .then(info => {
+      // console.log("message", { email, subject, message, info });
+      res.status(200).send({ message: "message has been sent" });
+    })
+    .catch(error => {
+      // console.log(error);
+      res.json(err);
+    });
 });
 
 module.exports = router;
