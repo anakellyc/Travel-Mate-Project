@@ -11,7 +11,7 @@ class AuthService {
     this.service = service;
   }
 
-  signup = (firstName, lastName, email, about, password) => {
+  signup = (firstName, lastName, email, about, password, confirmPassword) => {
     //debugger;
     return this.service
       .post("/signup", {
@@ -19,7 +19,8 @@ class AuthService {
         lastName,
         email,
         about,
-        password
+        password,
+        confirmPassword
         //avatarUrl
       })
       .then(response => response.data);

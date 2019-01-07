@@ -15,18 +15,20 @@ const User = require("../models/user-model");
 // });
 
 authRoutes.post("/signup", parser.single("avatarUrl"), (req, res, next) => {
+  debugger;
   const firstName = req.body.firstName;
   const lastName = req.body.lastName;
   const email = req.body.email;
   const about = req.body.about;
   const password = req.body.password;
+  const confirmPassword = req.body.confirmPassword;
 
   if (req.file) {
     var avatarUrl = req.file.url;
   }
 
   debugger;
-  if (!firstName || !lastName || !email || !password) {
+  if (!firstName || !lastName || !email || !password || !confirmPassword) {
     res.status(400).json({ message: "Please provide all required fields" });
     return;
   }
@@ -34,6 +36,13 @@ authRoutes.post("/signup", parser.single("avatarUrl"), (req, res, next) => {
   if (password.length <= 7) {
     res.status(400).json({
       message: "Please make your password is at least 8 characters long"
+    });
+    return;
+  }
+
+  if (password != confirmPassword) {
+    res.status(400).json({
+      message: "Passwords don't match"
     });
     return;
   }

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import AuthService from "../auth/auth-service";
-import TripList from "../trips/TripList";
+//import TripList from "../trips/TripList";
 import SearchTrip from "../trips/SearchTrip";
 //import { Route } from "react-router-dom";
 
@@ -40,7 +40,7 @@ class Profile extends Component {
                   <Link
                     className="btn btn-primary"
                     to="/trips"
-                    component={TripList}
+                    // component={TripList}
                     user={this.props.loggedInUser}
                   >
                     Trips

@@ -10,7 +10,8 @@ class EditUser extends Component {
       lastName: this.props.theUser.lastName,
       email: this.props.theUser.email,
       about: this.props.theUser.about,
-      password: this.props.theUser.password
+      password: this.props.theUser.password,
+      confirmPassword: this.props.theUser.confirmPassword
     };
   }
 
@@ -20,6 +21,7 @@ class EditUser extends Component {
     const email = this.state.email;
     const about = this.state.about;
     const password = this.state.password;
+    const confirmPassword = this.state.confirmPassword;
 
     event.preventDefault();
 
@@ -31,7 +33,8 @@ class EditUser extends Component {
           lastName,
           email,
           about,
-          password
+          password,
+          confirmPassword
         },
         { withCredentials: true }
       )
@@ -64,6 +67,11 @@ class EditUser extends Component {
   handleChangePass = event => {
     this.setState({
       password: event.target.value
+    });
+  };
+  handleChangePass = event => {
+    this.setState({
+      confirmPassword: event.target.value
     });
   };
 
@@ -110,6 +118,13 @@ class EditUser extends Component {
             type="password"
             name="password"
             value={this.state.password}
+            onChange={e => this.handleChangePass(e)}
+          />
+          <label>Confir password:</label>
+          <input
+            type="password"
+            name="confirmPassword"
+            value={this.state.confirmPassword}
             onChange={e => this.handleChangePass(e)}
           />
 

@@ -12,6 +12,7 @@ class Signup extends Component {
       email: "",
       about: "",
       password: "",
+      confirmPassword: "",
       avatarUrl: null,
       message: ""
     };
@@ -29,7 +30,7 @@ class Signup extends Component {
         email: this.state.email,
         about: this.state.about,
         password: this.state.password,
-
+        confirmPassword: this.state.confirmPassword,
         avatarUrl: this.state.avatarUrl
       })
       .then(() => {
@@ -61,8 +62,8 @@ class Signup extends Component {
         <div className="overlay" />
         <div className="main-w3layouts wrapper">
           <h2>SingUp and start exploring!</h2>
-          <div class="main-agileinfo">
-            <div class="agileits-top">
+          <div className="main-agileinfo">
+            <div className="agileits-top">
               <p>{this.state.message}</p>
               <form onSubmit={this.handleFormSubmit}>
                 <label />
@@ -112,6 +113,15 @@ class Signup extends Component {
                   type="password"
                   value={this.state.password}
                   placeholder="Password"
+                  onChange={e => this.handleChange(e)}
+                />
+                <label />
+                <input
+                  className="text"
+                  name="confirmPassword"
+                  type="password"
+                  value={this.state.confirmPassword}
+                  placeholder="Confirm password"
                   onChange={e => this.handleChange(e)}
                 />
                 <br />

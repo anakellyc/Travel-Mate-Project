@@ -1,7 +1,7 @@
 import React from "react";
-import { Link, Route } from "react-router-dom";
+import { Link } from "react-router-dom";
 import ScrollableAnchor from "react-scrollable-anchor";
-import Contact from "./Contact";
+//import Contact from "./Contact";
 
 //var Mailto = require("react-mailto");
 //import AuthService from "../auth/auth-service";

@@ -56,7 +56,7 @@ class TripList extends Component {
 
   render() {
     return (
-      <div class="page-wrapper bg-blue p-t-50 p-b-100 font-robo">
+      <div className="page-wrapper bg-blue p-t-50 p-b-100 font-robo">
         {/* <div> */}
         {/* <div style={{ width: "50%", float: "left" }}> */}
         <div className="container">

@@ -25,6 +25,7 @@ export default {
     formData.append("email", inputData.email);
     formData.append("about", inputData.about);
     formData.append("password", inputData.password);
+    formData.append("confirmPassword", inputData.confirmPassword);
     formData.append("avatarUrl", inputData.avatarUrl);
     return service
       .post(`${config.baseUrl}/api/signup`, formData, {
