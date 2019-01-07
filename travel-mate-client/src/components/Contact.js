@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import axios from "axios";
 //import { Link } from "react-router-dom";
 import config from "../config.json";
+import { browserHistory } from "react-router";
 
 class Contact extends Component {
   constructor(props) {
@@ -38,12 +39,14 @@ class Contact extends Component {
       // });
       .then(responseFromApi => {
         //console.log("this trip", responseFromApi);
-        this.props.history.push("/");
+        //this.props.history.push("/");
+        browserHistory.push("/");
         //return responseFromApi.data;
       })
       .catch(error => {
         //debugger;
-        this.props.history.push("/");
+        browserHistory.push("/");
+        //this.props.history.push("/");
       });
   };
 
