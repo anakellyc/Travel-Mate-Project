@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import axios from "axios";
 //import { Link } from "react-router-dom";
 import config from "../config.json";
+//import history from "../history.js";
 
 class Contact extends Component {
   constructor(props) {
@@ -9,7 +10,8 @@ class Contact extends Component {
     this.state = {
       subject: "",
       message: "",
-      replyto: ""
+      replyto: "",
+      postmessage: ""
     };
   }
 
@@ -19,7 +21,9 @@ class Contact extends Component {
     this.setState({ [name]: value });
   };
 
-  sendmessage = () => {
+  sendmessage = e => {
+    e.preventDefault();
+
     axios
       .post(`${config.baseUrl}/api/send-email`, {
         email: "yournewtravelmates@gmail.com",
@@ -37,15 +41,25 @@ class Contact extends Component {
       //   this.props.history.push("/");
       // });
       .then(responseFromApi => {
+        debugger;
         //console.log("this trip", responseFromApi);
-        this.props.history.push("/");
+        this.setState({
+          subject: "",
+          message: "",
+          replyto: "",
+          postmessage: "Your message has been sent"
+        });
+        //history.push("/contact");
 
         //return responseFromApi.data;
       })
       .catch(error => {
-        //debugger;
-
-        this.props.history.push("/");
+        debugger;
+        console.log(error);
+        this.setState({
+          postmessage: "An error ocurred, try again"
+        });
+        //history.push("/");
       });
   };
 
@@ -57,7 +71,12 @@ class Contact extends Component {
           <h2>Send your message and we'll be in touch soon</h2>
           <div class="main-agileinfo">
             <div class="agileits-top">
-              <form onSubmit={this.sendmessage}>
+              <p>{this.state.postmessage}</p>
+              <form
+                onSubmit={e => {
+                  this.sendmessage(e);
+                }}
+              >
                 <label />
                 <input
                   className="text"
