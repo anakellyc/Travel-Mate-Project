@@ -20,21 +20,31 @@ class Contact extends Component {
   };
 
   sendmessage = () => {
-    axios.post(`${config.baseUrl}/api/send-email`, {
-      email: "yournewtravelmates@gmail.com",
-      subject: this.state.subject,
-      message: this.state.message,
-      replyto: this.state.replyto
-    });
-    // .then(responseFromApi => {
-    //   //console.log("this trip", responseFromApi);
-    //   this.props.history.push("/");
-    //   return responseFromApi.data;
-    // })
-    // .catch(error => {
-    //   //debugger;
-    //   this.props.history.push("/");
-    // });
+    axios
+      .post(`${config.baseUrl}/api/send-email`, {
+        email: "yournewtravelmates@gmail.com",
+        subject: this.state.subject,
+        message: this.state.message,
+        replyto: this.state.replyto
+      })
+      // .then(responseFromApi => {
+      //   //console.log("this trip", responseFromApi);
+      //   this.props.history.push("/");
+      //   return responseFromApi.data;
+      // })
+      // .catch(error => {
+      //   //debugger;
+      //   this.props.history.push("/");
+      // });
+      .then(responseFromApi => {
+        //console.log("this trip", responseFromApi);
+        this.props.history.push("/");
+        //return responseFromApi.data;
+      })
+      .catch(error => {
+        //debugger;
+        this.props.history.push("/");
+      });
   };
 
   render() {
