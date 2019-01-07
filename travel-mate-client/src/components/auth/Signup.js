@@ -12,7 +12,8 @@ class Signup extends Component {
       email: "",
       about: "",
       password: "",
-      avatarUrl: null
+      avatarUrl: null,
+      message: ""
     };
     this.service = new AuthService();
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
@@ -34,6 +35,12 @@ class Signup extends Component {
       .then(() => {
         //thisContext.forceUpdate();
         thisContext.props.loginUser();
+      })
+      .catch(error => {
+        console.log(error);
+        this.setState({
+          message: error
+        });
       });
   };
 
@@ -56,6 +63,7 @@ class Signup extends Component {
           <h2>SingUp and start exploring!</h2>
           <div class="main-agileinfo">
             <div class="agileits-top">
+              <p>{this.state.message}</p>
               <form onSubmit={this.handleFormSubmit}>
                 <label />
                 <input

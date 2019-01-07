@@ -31,15 +31,6 @@ class Contact extends Component {
         message: this.state.message,
         replyto: this.state.replyto
       })
-      // .then(responseFromApi => {
-      //   //console.log("this trip", responseFromApi);
-      //   this.props.history.push("/");
-      //   return responseFromApi.data;
-      // })
-      // .catch(error => {
-      //   //debugger;
-      //   this.props.history.push("/");
-      // });
       .then(responseFromApi => {
         debugger;
         //console.log("this trip", responseFromApi);
@@ -49,9 +40,6 @@ class Contact extends Component {
           replyto: "",
           postmessage: "Your message has been sent"
         });
-        //history.push("/contact");
-
-        //return responseFromApi.data;
       })
       .catch(error => {
         debugger;
@@ -59,7 +47,6 @@ class Contact extends Component {
         this.setState({
           postmessage: "An error ocurred, try again"
         });
-        //history.push("/");
       });
   };
 

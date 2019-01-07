@@ -87,7 +87,11 @@ if (process.env.ENV == "production") {
 app.use(
   cors({
     credentials: true,
-    origin: ["http://localhost:3000", "http://travelmate.fun"]
+    origin: [
+      "http://localhost:3000",
+      "http://travelmate.fun",
+      "http://www.travelmate.fun"
+    ]
   })
 );
 

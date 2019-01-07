@@ -27,14 +27,13 @@ authRoutes.post("/signup", parser.single("avatarUrl"), (req, res, next) => {
 
   debugger;
   if (!firstName || !lastName || !email || !password) {
-    res.status(400).json({ message: "Provide all required fields" });
+    res.status(400).json({ message: "Please provide all required fields" });
     return;
   }
 
   if (password.length <= 7) {
     res.status(400).json({
-      message:
-        "Please make your password at least 8 characters long for security purposes."
+      message: "Please make your password is at least 8 characters long"
     });
     return;
   }
@@ -42,13 +41,13 @@ authRoutes.post("/signup", parser.single("avatarUrl"), (req, res, next) => {
   User.findOne({ email }, (err, foundUser) => {
     debugger;
     if (err) {
-      res.status(500).json({ message: "User check went bad." });
+      res.status(500).json({ message: "User check went bad" });
       return;
     }
 
     if (foundUser) {
       debugger;
-      res.status(400).json({ message: "User already exists." });
+      res.status(400).json({ message: "User already exists" });
       return;
     }
 

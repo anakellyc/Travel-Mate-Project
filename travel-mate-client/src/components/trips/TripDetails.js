@@ -11,7 +11,8 @@ class TripDetails extends Component {
       trip: {},
       subject: "",
       message: "",
-      replyto: ""
+      replyto: "",
+      postmessage: ""
     };
   }
 
@@ -87,21 +88,46 @@ class TripDetails extends Component {
     this.setState({ [name]: value });
   };
 
-  sendmessage = () => {
-    axios.post(`${config.baseUrl}/api/send-email`, {
-      // axios.post(`${config.baseUrl}/api/contact`, {
-      email: this.state.trip.owner.email,
-      subject: this.state.subject,
-      message: this.state.message,
-      replyto: this.props.loggedInUser.email
-    });
+  // sendmessage = () => {
+  //   axios.post(`${config.baseUrl}/api/send-email`, {
+  //     // axios.post(`${config.baseUrl}/api/contact`, {
+  //     email: this.state.trip.owner.email,
+  //     subject: this.state.subject,
+  //     message: this.state.message,
+  //     replyto: this.props.loggedInUser.email
+  //   });
+  // };
+
+  sendmessage = e => {
+    e.preventDefault();
+
+    axios
+      .post(`${config.baseUrl}/api/send-email`, {
+        email: this.state.trip.owner.email,
+        subject: this.state.subject,
+        message: this.state.message,
+        replyto: this.props.loggedInUser.email
+      })
+      .then(responseFromApi => {
+        debugger;
+        //console.log("this trip", responseFromApi);
+        this.setState({
+          subject: "",
+          message: "",
+          replyto: "",
+          postmessage: "Your message has been sent"
+        });
+      })
+      .catch(error => {
+        debugger;
+        console.log(error);
+        this.setState({
+          postmessage: "An error ocurred, try again"
+        });
+      });
   };
 
   ownershipCheck = trip => {
-    // debugger;
-    // console.log(trip);
-    // console.log(trip.owner);
-    // console.log(this.props.loggedInUser);
     if (
       this.props.loggedInUser &&
       trip.owner &&
@@ -129,7 +155,13 @@ class TripDetails extends Component {
               <div className="main-w3layouts wrapper">
                 <div class="small-agileinfo">
                   <div class="agileits-extra">
-                    <form onSubmit={this.sendmessage}>
+                    <p>{this.state.postmessage}</p>
+                    {/* <form onSubmit={this.sendmessage}> */}
+                    <form
+                      onSubmit={e => {
+                        this.sendmessage(e);
+                      }}
+                    >
                       <br />
                       <label>Subject</label>
                       <input

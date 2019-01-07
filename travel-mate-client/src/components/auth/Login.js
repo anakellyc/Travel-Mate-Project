@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 class Login extends Component {
   constructor(props) {
     super(props);
-    this.state = { email: "", password: "" };
+    this.state = { email: "", password: "", message: "" };
     this.service = new AuthService();
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
   }
@@ -25,7 +25,12 @@ class Login extends Component {
         });
         this.props.getUser(response);
       })
-      .catch(error => console.log(error));
+      .catch(error => {
+        console.log(error);
+        this.setState({
+          message: "Invalid credentials"
+        });
+      });
   };
 
   handleChange = event => {
@@ -61,6 +66,7 @@ class Login extends Component {
         <div className="main-w3layouts wrapper">
           <div className="main-agileinfo">
             <div className="agileits-top">
+              <p>{this.state.message}</p>
               <form onSubmit={this.handleFormSubmit}>
                 <label />
                 <input
