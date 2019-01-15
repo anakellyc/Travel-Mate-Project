@@ -627,7 +627,10 @@ code {
   color: white;
   font-weight: bold;
 }
-
+.white-text-font {
+  font-family: Roboto;
+  font-weight: 400;
+}
 .border-bottom {
   border-bottom: 1px solid darkgray;
   padding-bottom: 1em;

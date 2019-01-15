@@ -2,6 +2,12 @@ import React, { Component } from "react";
 import "./App.css";
 import "./index.css";
 import { Switch, Route } from "react-router-dom";
+
+//start oauth test
+//import io from "socket.io-client";
+//import { baseUrl } from "./config.json";
+//end oauth test
+
 //import { goToAnchor } from "react-scrollable-anchor";
 //import ScrollableAnchor from "react-scrollable-anchor";
 
@@ -16,6 +22,11 @@ import Profile from "./components/auth/Profile";
 import UserDetails from "./components/auth/UserDetails";
 import SearchTrip from "./components/trips/SearchTrip";
 import Contact from "./components/Contact";
+
+//start oauth test
+//const socket = io(baseUrl);
+//const providers = ["twitter", "google", "facebook", "github"];
+//end oauth test
 
 class App extends Component {
   constructor(props) {
@@ -138,6 +149,16 @@ class App extends Component {
               path="/login"
               render={() => <Login getUser={this.getTheUser} />}
             />
+            {/* start oauth test, uncomment paragraph below
+            {providers.map(provider => (
+              <Login
+                getUser={this.getTheUser}
+                provider={provider}
+                key={provider}
+                socket={socket}
+              />
+            ))}
+            end oauth test */}
             <Route
               exact
               path="/contact"

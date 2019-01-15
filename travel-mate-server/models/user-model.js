@@ -23,7 +23,8 @@ const userSchema = new Schema(
       default:
         "https://res.cloudinary.com/anakcampos/image/upload/v1545153483/travel-mate/default-avatar.png"
     },
-    trips: [{ type: Schema.Types.ObjectId, ref: "Trip" }]
+    trips: [{ type: Schema.Types.ObjectId, ref: "Trip" }],
+    facebookId: { type: String, required: false }
   },
   {
     timestamps: true

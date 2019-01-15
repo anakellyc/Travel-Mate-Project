@@ -5,14 +5,9 @@ const passport = require("passport");
 const bcrypt = require("bcryptjs");
 const multer = require("multer");
 var bodyParser = require("body-parser");
+var config = require("../config");
 
-// require the user model !!!!
 const User = require("../models/user-model");
-
-// authRoutes.post("/cloudetest", parser.single("picture"), (req, res) => {
-//   debugger
-//   res.status(200).send("OK");
-// });
 
 authRoutes.post("/signup", parser.single("avatarUrl"), (req, res, next) => {
   debugger;
@@ -80,7 +75,6 @@ authRoutes.post("/signup", parser.single("avatarUrl"), (req, res, next) => {
           .json({ message: "Saving user to database went wrong." });
         return;
       }
-
       // Automatically log in user after sign up
       // .login() here is actually predefined passport method
       req.login(aNewUser, err => {
@@ -133,6 +127,7 @@ authRoutes.post("/login", (req, res, next) => {
       // We are now logged in (that's why we can also send req.user)
       //debugger;
       res.status(200).json(theUser);
+      console.log("user logged in");
     });
   })(req, res, next);
 });
@@ -152,5 +147,31 @@ authRoutes.get("/loggedin", (req, res, next) => {
   }
   res.status(403).json({ message: "Unauthorized" });
 });
+
+authRoutes.get(
+  "/auth/facebook",
+  passport.authenticate("facebook", {
+    scope: ["email", "user_photos"]
+    // res.redirect(`${config.reactUrl}/profile`);
+    // console.log("Authenticated with facebook");
+  })
+);
+// authRoutes.get(
+//   "/auth/facebook/callback",
+//   passport.authenticate("facebook", {
+//     successRedirect: "/profile",
+//     failureRedirect: "/login"
+//   })
+// );
+
+authRoutes.get(
+  "/auth/facebook/callback",
+  passport.authenticate("facebook", { failureRedirect: "/login" }),
+  function(req, res) {
+    // Successful authentication, redirect home.
+    res.status(200).json(foundUser);
+    res.redirect(`{config.reactUrl/profile}`);
+  }
+);
 
 module.exports = authRoutes;

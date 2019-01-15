@@ -53,6 +53,7 @@ app.use(
   })
 );
 if (process.env.ENV == "development") {
+  // console.log("hoioioi");
   app.set("views", path.join(__dirname, "views"));
   app.set("view engine", "hbs");
 }
@@ -77,6 +78,7 @@ app.use(passport.session());
 
 //Production environment
 if (process.env.ENV == "production") {
+  console.log("hiihihi");
   app.use(express.static(path.join(__dirname, "build")));
   app.get("/", function(req, res) {
     res.sendFile(path.join(__dirname, "build", "index.html"));
@@ -90,7 +92,8 @@ app.use(
     origin: [
       "http://localhost:3000",
       "http://travelmate.fun",
-      "http://www.travelmate.fun"
+      "http://www.travelmate.fun",
+      "http://104.248.204.166"
     ]
   })
 );

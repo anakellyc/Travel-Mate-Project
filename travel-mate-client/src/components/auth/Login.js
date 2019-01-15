@@ -1,7 +1,9 @@
 import React, { Component } from "react";
 import AuthService from "./auth-service";
 import { Link } from "react-router-dom";
+import "../../index.css";
 //import api from "../../api";
+import config from "../../config.json";
 
 class Login extends Component {
   constructor(props) {
@@ -40,27 +42,6 @@ class Login extends Component {
 
   render() {
     return (
-      //     <div className="login-page ng-scope ui-view">
-      //       <div className="row">
-      //         <div className="col-md-4 col-lg-4 col-md-offset-4 col-lg-offset-4">
-      //           <img src={require("../../common/images/flat-avatar.png")} className="user-avatar" />
-      //           <h1>Ani Theme <small>Free React.js Edition</small></h1>
-      //           <form role="form" onSubmit={this.handleLogin} className="ng-pristine ng-valid">
-      //             <div className="form-content">
-      //               <div className="form-group">
-      //                 <input type="text" className="form-control input-underline input-lg" placeholder="Email" />
-      //               </div>
-      //               <div className="form-group">
-      //                 <input type="password" className="form-control input-underline input-lg" placeholder="Password" />
-      //               </div>
-      //             </div>
-      //             <button type="submit" className="btn btn-white btn-outline btn-lg btn-rounded">Login</button>
-      //           </form>
-      //         </div>
-      //       </div>
-      //     </div>
-
-      // );
       <header className="masthead text-white text-center">
         <div className="overlay" />
         <div className="main-w3layouts wrapper">
@@ -93,6 +74,20 @@ class Login extends Component {
                 Don't have account?
                 <Link to={"/signup"}> Signup</Link>
               </p>
+              <p>Or</p>
+              {/* <button className="btn btn-primary" type="submit">
+                <a
+                  className="link-style white-text icon-social-facebook"
+                  href="/auth/facebook"
+                >
+                  <span className="white-text-font">Login with Facebook</span>
+                </a>
+              </button> */}
+              <button>
+                <a href={`${config.baseUrl}/api/auth/facebook`}>
+                  Login with Facebook
+                </a>
+              </button>
             </div>
           </div>
         </div>
