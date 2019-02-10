@@ -9,6 +9,7 @@ const mongoose = require("mongoose");
 const logger = require("morgan");
 const path = require("path");
 const cors = require("cors");
+const nodemailer = require("nodemailer");
 
 const session = require("express-session");
 const passport = require("passport");
@@ -78,7 +79,6 @@ app.use(passport.session());
 
 //Production environment
 if (process.env.ENV == "production") {
-  console.log("hiihihi");
   app.use(express.static(path.join(__dirname, "build")));
   app.get("/", function(req, res) {
     res.sendFile(path.join(__dirname, "build", "index.html"));

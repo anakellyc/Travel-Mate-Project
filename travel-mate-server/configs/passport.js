@@ -49,6 +49,7 @@ passport.use(
       clientID: process.env.FACEBOOK_APP_ID,
       clientSecret: process.env.FACEBOOK_APP_SECRET,
       callbackURL: `${config.reactUrl}/auth/facebook/callback`,
+      // callbackURL: `${config.reactUrl}/auth/profile`,
       // passReqToCallback: true,
       profileFields: ["id", "emails", "name", "photos", "picture"]
     },
