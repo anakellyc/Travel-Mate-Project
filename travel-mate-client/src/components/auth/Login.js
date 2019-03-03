@@ -74,7 +74,7 @@ class Login extends Component {
                 Don't have account?
                 <Link to={"/signup"}> Signup</Link>
               </p>
-              <p>Or</p>
+              {/* <p>Or</p> */}
               {/* <button className="btn btn-primary" type="submit">
                 <a
                   className="link-style white-text icon-social-facebook"
@@ -83,11 +83,11 @@ class Login extends Component {
                   <span className="white-text-font">Login with Facebook</span>
                 </a>
               </button> */}
-              <button>
+              {/* <button>
                 <a href={`${config.baseUrl}/api/auth/facebook`}>
                   Login with Facebook
                 </a>
-              </button>
+              </button> */}
             </div>
           </div>
         </div>
