@@ -2,8 +2,8 @@ const User = require("../models/user-model");
 const LocalStrategy = require("passport-local").Strategy;
 const bcrypt = require("bcryptjs");
 const passport = require("passport");
-const FacebookStrategy = require("passport-facebook").Strategy;
-var config = require("../config");
+// const FacebookStrategy = require("passport-facebook").Strategy;
+// var config = require("../config");
 
 passport.serializeUser((loggedInUser, cb) => {
   cb(null, loggedInUser._id);
@@ -16,7 +16,7 @@ passport.deserializeUser((userIdFromSession, cb) => {
       return;
     }
     cb(null, userDocument);
-    console.log(userDocument);
+    // console.log(userDocument);
   });
 });
 
@@ -43,93 +43,93 @@ passport.use(
   })
 );
 
-passport.use(
-  new FacebookStrategy(
-    {
-      clientID: process.env.FACEBOOK_APP_ID,
-      clientSecret: process.env.FACEBOOK_APP_SECRET,
-      callbackURL: `${config.reactUrl}/auth/facebook/callback`,
-      // callbackURL: `${config.reactUrl}/auth/profile`,
-      // passReqToCallback: true,
-      profileFields: ["id", "emails", "name", "photos", "picture"]
-    },
-    function(accessToken, refreshToken, profile, done) {
-      debugger;
-      User.find({ facebookId: profile.id }, function(err, foundUser, next) {
-        //begin
-        debugger;
-        if (err) {
-          console.log("error:", err);
-          return done(err);
-          // next(err);
-          // return;
-        }
+// passport.use(
+//   new FacebookStrategy(
+//     {
+//       clientID: process.env.FACEBOOK_APP_ID,
+//       clientSecret: process.env.FACEBOOK_APP_SECRET,
+//       callbackURL: `${config.reactUrl}/auth/facebook/callback`,
+//       // callbackURL: `${config.reactUrl}/auth/profile`,
+//       // passReqToCallback: true,
+//       profileFields: ["id", "emails", "name", "photos", "picture"]
+//     },
+//     function(accessToken, refreshToken, profile, done) {
+//       debugger;
+//       User.find({ facebookId: profile.id }, function(err, foundUser, next) {
+//         //begin
+//         debugger;
+//         if (err) {
+//           console.log("error:", err);
+//           return done(err);
+//           // next(err);
+//           // return;
+//         }
 
-        if (!foundUser) {
-          console.log(profile.name);
-          User.create(
-            {
-              facebookId: profile.id,
-              firstName: profile.name.givenName,
-              lastName: profile.name.familyName,
-              email: profile.emails[0].value,
-              avatarUrl: profile.picture
-            },
-            function(err, foundUser) {
-              // done(null, foundUser);
-              req.login(foundUser, err => {
-                if (err) {
-                  res.status(500).json({ message: "Session save went bad." });
-                  return;
-                }
+//         if (!foundUser) {
+//           console.log(profile.name);
+//           User.create(
+//             {
+//               facebookId: profile.id,
+//               firstName: profile.name.givenName,
+//               lastName: profile.name.familyName,
+//               email: profile.emails[0].value,
+//               avatarUrl: profile.picture
+//             },
+//             function(err, foundUser) {
+//               // done(null, foundUser);
+//               req.login(foundUser, err => {
+//                 if (err) {
+//                   res.status(500).json({ message: "Session save went bad." });
+//                   return;
+//                 }
 
-                // We are now logged in (that's why we can also send req.user)
-                //debugger;
-                res.status(200).json(foundUser);
-                console.log("user logged in");
-              });
-            }
-          );
-          // const aNewUser = new User({
-          //   facebookId: profile.id,
-          //   firstName: profile.name.givenName,
-          //   lastName: profile.name.familyName,
-          //   email: profile.emails[0].value,
-          //   avatarUrl: profile.picture
-          // });
-          // debugger;
-          // aNewUser.save(err => {
-          //   debugger;
-          //   if (err) {
-          //     res
-          //       .status(400)
-          //       .json({ message: "Saving user to database went wrong." });
-          //     return;
-          //   }
-          //   return;
-          // });
-        }
+//                 // We are now logged in (that's why we can also send req.user)
+//                 //debugger;
+//                 res.status(200).json(foundUser);
+//                 console.log("user logged in");
+//               });
+//             }
+//           );
+//           // const aNewUser = new User({
+//           //   facebookId: profile.id,
+//           //   firstName: profile.name.givenName,
+//           //   lastName: profile.name.familyName,
+//           //   email: profile.emails[0].value,
+//           //   avatarUrl: profile.picture
+//           // });
+//           // debugger;
+//           // aNewUser.save(err => {
+//           //   debugger;
+//           //   if (err) {
+//           //     res
+//           //       .status(400)
+//           //       .json({ message: "Saving user to database went wrong." });
+//           //     return;
+//           //   }
+//           //   return;
+//           // });
+//         }
 
-        // next(null, foundUser[0]);
+//         // next(null, foundUser[0]);
 
-        next(
-          null,
-          req.login(foundUser[0], err => {
-            if (err) {
-              res.status(500).json({ message: "Session save went bad." });
-              return;
-            }
+//         next(
+//           null,
+//           req.login(foundUser[0], err => {
+//             if (err) {
+//               res.status(500).json({ message: "Session save went bad." });
+//               return;
+//             }
 
-            // We are now logged in (that's why we can also send req.user)
-            //debugger;
-            res.status(200).json(foundUser);
-            console.log("user logged in");
-          })
-        );
-      });
-    }
-  )
-);
+//             // We are now logged in (that's why we can also send req.user)
+//             //debugger;
+//             res.status(200).json(foundUser);
+//             console.log("user logged in");
+//           })
+//         );
+//       });
+//     }
+//   )
+// );
 //end
 
 // debugger;

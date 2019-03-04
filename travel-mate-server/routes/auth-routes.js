@@ -5,7 +5,7 @@ const passport = require("passport");
 const bcrypt = require("bcryptjs");
 const multer = require("multer");
 var bodyParser = require("body-parser");
-var config = require("../config");
+// var config = require("../config");
 
 const User = require("../models/user-model");
 
@@ -148,30 +148,30 @@ authRoutes.get("/loggedin", (req, res, next) => {
   res.status(403).json({ message: "Unauthorized" });
 });
 
-authRoutes.get(
-  "/auth/facebook",
-  passport.authenticate("facebook", {
-    scope: ["email", "user_photos"]
-    // res.redirect(`${config.reactUrl}/profile`);
-    // console.log("Authenticated with facebook");
-  })
-);
 // authRoutes.get(
-//   "/auth/facebook/callback",
+//   "/auth/facebook",
 //   passport.authenticate("facebook", {
-//     successRedirect: "/profile",
-//     failureRedirect: "/login"
+//     scope: ["email", "user_photos"]
+//     // res.redirect(`${config.reactUrl}/profile`);
+//     // console.log("Authenticated with facebook");
 //   })
 // );
+// // authRoutes.get(
+// //   "/auth/facebook/callback",
+// //   passport.authenticate("facebook", {
+// //     successRedirect: "/profile",
+// //     failureRedirect: "/login"
+// //   })
+// // );
 
-authRoutes.get(
-  "/auth/facebook/callback",
-  passport.authenticate("facebook", { failureRedirect: "/login" }),
-  function(req, res) {
-    // Successful authentication, redirect home.
-    res.status(200).json(foundUser);
-    res.redirect(`{config.reactUrl/profile}`);
-  }
-);
+// authRoutes.get(
+//   "/auth/facebook/callback",
+//   passport.authenticate("facebook", { failureRedirect: "/login" }),
+//   function(req, res) {
+//     // Successful authentication, redirect home.
+//     res.status(200).json(foundUser);
+//     res.redirect(`{config.reactUrl/profile}`);
+//   }
+// );
 
 module.exports = authRoutes;

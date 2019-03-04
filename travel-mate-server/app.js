@@ -18,10 +18,7 @@ require("./configs/passport");
 var cloudinary = require("./configs/cloudinary");
 
 mongoose
-  .connect(
-    "mongodb://localhost/travel-mate-server",
-    { useNewUrlParser: true }
-  )
+  .connect("mongodb://localhost/travel-mate-server", { useNewUrlParser: true })
   .then(x => {
     console.log(
       `Connected to Mongo! Database name: "${x.connections[0].name}"`
@@ -54,7 +51,6 @@ app.use(
   })
 );
 if (process.env.ENV == "development") {
-  // console.log("hoioioi");
   app.set("views", path.join(__dirname, "views"));
   app.set("view engine", "hbs");
 }
@@ -93,7 +89,7 @@ app.use(
       "http://localhost:3000",
       "http://travelmate.fun",
       "http://www.travelmate.fun",
-      "http://104.248.204.166"
+      "http://188.166.44.36"
     ]
   })
 );

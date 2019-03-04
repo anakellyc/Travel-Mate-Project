@@ -3,7 +3,7 @@ import AuthService from "./auth-service";
 import { Link } from "react-router-dom";
 import "../../index.css";
 //import api from "../../api";
-import config from "../../config.json";
+// import config from "../../config.json";
 
 class Login extends Component {
   constructor(props) {
